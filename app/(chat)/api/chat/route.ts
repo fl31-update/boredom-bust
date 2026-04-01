@@ -73,7 +73,9 @@ export async function POST(request: Request) {
     const { id, message, messages, selectedChatModel, selectedVisibilityType } = requestBody;
     const [, session] = await Promise.all([checkBotId().catch(() => null), auth()]);
 
-    if (!session?.user) return new ChatbotError("unauthorized:chat").toResponse();
+   // if (!session?.user) {
+//   return new ChatbotError("unauthorized:chat").toResponse();
+// }
 
     const chatModel = allowedModelIds.has(selectedChatModel) ? selectedChatModel : DEFAULT_CHAT_MODEL;
     await checkIpRateLimit(ipAddress(request));
